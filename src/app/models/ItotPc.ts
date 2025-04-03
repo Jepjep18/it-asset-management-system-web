@@ -1,0 +1,33 @@
+export class ItotPc {
+    id?: number;
+    type: '';
+    asset_barcode = '';
+    date_acquired = '';
+    pc_type = '';    
+    brand = '';
+    model = '';
+    processor = '';
+    ram = '';
+    ssd: '';
+    hdd: '';
+    gpu: '';
+    storage_type = '';
+    operating_system = '';
+    graphics = '';
+    size = '';
+    color = '';
+    po = '';
+    warranty = '';
+    cost = '';
+    remarks = '';
+    asset_image = '';
+    owner_id = '';
+    is_deleted = '';
+    li_description = '';    
+    serial_no = '';     
+    status = '';
+    assigned = '';
+    history = ''; 
+    date_created = '';
+    date_updated = '';   
+  }

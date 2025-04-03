@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>ITAM - IT ASSETS MANAGEMENT</title>
+        <meta charset="utf-8" />
+        <meta
+            name="description"
+            content="Admin Template and Starter Kit with Angular, Angular Material Components and TailwindCSS"
+        />
+        <meta
+            name="keywords"
+            content="Fuse,HTML,CSS,Angular,Angular 2,Angular 10,Angular 11,Angular 12,Material,Material 2,Angular Components,Tailwind,Tailwind CSS,TailwindCSS,Admin Template,Admin Starter Kit"
+        />
+        <meta
+            name="viewport"
+            content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0"
+        />
+
+        <base href="/" />
+
+        <!-- Favicon -->
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="128x128"
+            href="assets/images/logo/favicon-192x192.png"
+        />
+
+        <!-- Fonts -->
+        <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"
+            rel="stylesheet"
+        /> -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+            rel="stylesheet"
+        />
+        <!-- Icon fonts -->
+        <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+        />
+
+        <!-- Splash screen styles -->
+        <link href="assets/styles/splash-screen.css" rel="stylesheet" />
+
+        <!-- Add this in the <head> section of index.html -->
+        <style media="print">
+            @page {
+                margin: 0;
+                size: auto;
+            }
+        </style>
+        <style>
+            body {
+                font-family: "Geist", serif;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- Splash screen -->
+        <fuse-splash-screen>
+            <img
+                class="-mb-5"
+                style="height: 65px; width: 65px"
+                src="assets/images/logo/favicon-192x192.png"
+                alt="It Assets Logo"
+            />
+            <div class="spinner w-16">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </fuse-splash-screen>
+
+        <!-- App root -->
+        <app-root></app-root>
+    </body>
+</html>

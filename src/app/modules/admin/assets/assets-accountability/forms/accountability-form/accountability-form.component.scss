@@ -1,0 +1,126 @@
+.custom-mat-table {
+    .mat-header-cell,
+    .mat-cell {
+        font-size: 10px !important; /* Ensures smaller text */
+        padding: 8px 12px !important; /* Adjusts spacing between cells */
+        line-height: 1.4 !important; /* Improves readability */
+        text-transform: uppercase; /* Converts text to uppercase */
+    }
+
+    .mat-header-row,
+    .mat-row {
+        height: 40px !important; /* Adjust row height for even spacing */
+    }
+}
+.page-break {
+    page-break-before: always;
+}
+
+@media print {
+    /* Set A4 page size */
+    #pdfFormArea {
+        width: 210mm;
+        min-height: 297mm;
+        max-height: 297mm; /* Prevents content from overflowing a single page */
+        margin: 0 auto;
+        page-break-after: always;
+        overflow: hidden; /* Hides overflow to prevent content cutting */
+    }
+
+    /* Ensures tables, text, and elements properly paginate */
+    .custom-mat-table {
+        page-break-inside: avoid; /* Prevents tables from splitting awkwardly */
+    }
+
+    .mat-row {
+        page-break-after: auto;
+    }
+
+    .page-break {
+        page-break-before: always; /* Forces new page */
+    }
+
+    /* Optional: Reduce padding/margins for better fit */
+    .p-16 {
+        padding: 8px !important;
+    }
+
+    .text-sm {
+        font-size: 10px !important;
+    }
+
+    .text-lg {
+        font-size: 12px !important;
+    }
+}
+
+.loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #111827;
+    color: #F9FAFB;
+    z-index: 999999;
+    pointer-events: none;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.loader img {
+    height: 65px;
+    width: 65px;
+}
+
+.loader .spinner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+    width: 56px;
+}
+
+.loader .spinner > div {
+    width: 12px;
+    height: 12px;
+    background-color: #ffffff;
+    border-radius: 100%;
+    display: inline-block;
+    animation: loader-bouncedelay 1s infinite ease-in-out both;
+}
+
+.loader .spinner .bounce1 {
+    animation-delay: -0.32s;
+}
+
+.loader .spinner .bounce2 {
+    animation-delay: -0.16s;
+}
+
+.loader .spinner .bounce3 {
+    animation-delay: 0s;
+}
+
+@keyframes loader-bouncedelay {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1.0);
+    }
+}
+
+body:not(.loader-hidden) {
+    overflow: hidden;
+}
+
+body.loader-hidden .loader {
+    visibility: hidden;
+    opacity: 0;
+}

@@ -1,0 +1,528 @@
+
+<!-- Add this loader somewhere in your template -->
+<div  *ngIf="loading" class="loader">
+    <img
+        class="-mb-5"
+        style="height: 65px; width: 65px"
+        src="assets/images/logo/favicon-192x192.png"
+        alt="It Assets Logo"
+    />
+    <div class="spinner w-16">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+<div *ngIf="asset">
+    <form
+        [formGroup]="eventForm"
+        (ngSubmit)="updateComponent()"
+        class="absolute inset-0 flex flex-col min-w-0 overflow-hidden"
+    >
+        <mat-drawer-container class="flex-auto h-full">
+            <!-- Drawer -->
+            <mat-drawer
+                class="w-90 dark:bg-gray-900"
+                [autoFocus]="false"
+                [mode]="drawerMode"
+                [opened]="drawerOpened"
+                #matDrawer
+            >
+                <div class="flex flex-col items-start p-8 border-b">
+                    <!-- Back to courses -->
+                    <a
+                        class="inline-flex items-center leading-6 text-primary hover:underline"
+                        (click)="goBack()"
+                    >
+                        <span class="inline-flex items-center">
+                            <mat-icon
+                                class="icon-size-5 text-current"
+                                [svgIcon]="'heroicons_solid:arrow-sm-left'"
+                            ></mat-icon>
+                            <span class="ml-1.5 font-medium leading-5"
+                                >Go back</span
+                            >
+                        </span>
+                    </a>
+                    <!-- Course title & description -->
+                    <div class="mt-7 text-2xl font-semibold">
+                        Edit Component
+                    </div>
+                    <div class="text-secondary">
+                        Fill in the fields for the details you want to update in this component
+                    </div>
+                </div>
+
+                <!-- Steps -->
+                <div class="py-2 px-8">
+                    <ol>
+                        <div class="flex flex-col w-full gap-2">
+                            <mat-label class="font-semibold flex-col flex">
+                                Update component
+                                <span class="text-sm font-medium text-gray-500">
+                                    Fill all the required fields to update
+                                    component
+                                </span>
+                            </mat-label>
+                            <mat-form-field class="w-full" appearance="fill">
+                                <!-- Make mat-form-field take full width -->
+                                <mat-label class="text-primary text-sm"
+                                    >Inventory code</mat-label
+                                >
+                                <mat-icon
+                                    svgIcon="feather:hash"
+                                    class="icon-size-4"
+                                ></mat-icon>
+                                <input
+                                    matInput
+                                    id="uid"
+                                    formControlName="uid"
+                                />
+                            </mat-form-field>
+                            <mat-form-field class="w-full" appearance="fill">
+                                <!-- Make mat-form-field take full width -->
+                                <mat-label class="text-primary text-sm"
+                                    >Cost</mat-label
+                                >
+                                <mat-icon
+                                    svgIcon="mat_outline:attach_money"
+                                    class="icon-size-4"
+                                ></mat-icon>
+                                <input
+                                    matInput
+                                    id="cost"
+                                    formControlName="cost"
+                                />
+                            </mat-form-field>
+                            <mat-form-field class="w-full" appearance="fill">
+                                <!-- Make mat-form-field take full width -->
+                                <mat-label class="text-primary text-sm"
+                                    >Component Description</mat-label
+                                >
+                                <mat-icon
+                                    svgIcon="feather:server"
+                                    class="icon-size-4 mr-1"
+                                ></mat-icon>
+                                <input
+                                    matInput
+                                    id="description"
+                                    formControlName="description"
+                                />
+                            </mat-form-field>
+
+                            <button
+                                class="px-6"
+                                mat-flat-button
+                                type="submit"
+                                [color]="'primary'"
+                            >
+                                <mat-icon
+                                    class="icon-size-4"
+                                    svgIcon="mat_solid:subdirectory_arrow_right"
+                                ></mat-icon>
+                                <span class="ml-1 text-sm"> Save changes</span>
+                            </button>
+                        </div>
+                    </ol>
+                </div>
+            </mat-drawer>
+
+            <!-- Drawer content -->
+            <mat-drawer-content class="flex flex-col overflow-hidden">
+                <!-- Header -->
+                <div
+                    class="lg:hidden flex flex-0 items-center py-2 pl-4 pr-6 sm:py-4 md:pl-6 md:pr-8 border-b lg:border-b-0 bg-card dark:bg-transparent"
+                >
+                    <!-- Title & Actions -->
+                    <button mat-icon-button [routerLink]="['..']">
+                        <mat-icon
+                            [svgIcon]="'heroicons_outline:arrow-sm-left'"
+                        ></mat-icon>
+                    </button>
+                    <h2
+                        class="ml-2.5 text-md sm:text-xl font-medium tracking-tight truncate"
+                    >
+                        Accountability Details
+                    </h2>
+                </div>
+                <mat-progress-bar
+                    class="hidden lg:block flex-0 h-0.5 w-full"
+                ></mat-progress-bar>
+
+                <!-- Main -->
+                <div class="flex-auto overflow-y-auto" cdkScrollable>
+                    <!-- Steps -->
+                    <mat-tab-group
+                        class="fuse-mat-no-header"
+                        [animationDuration]="'200'"
+                        #courseSteps
+                    >
+                        <mat-tab>
+                            <ng-template matTabContent>
+                                <div
+                                    class="mx-auto inset-0 min-w-0 text-center overflow-auto print:overflow-visible"
+                                    cdkScrollable
+                                >
+                                    <!-- A4 Wrapper -->
+                                    <div class="a4-container">
+                                        <!-- Page Content -->
+                                        <div
+                                            class="inline-block p-6 sm:p-10 text-left print:p-0"
+                                        >
+                                            <div
+                                                class="w-240 min-w-240 p-16 rounded-2xl shadow bg-card print:w-auto print:p-0 print:rounded-none print:shadow-none print:bg-transparent"
+                                            >
+                                                <div
+                                                    id="pdfFormArea"
+                                                    #pdfFormArea
+                                                >
+                                                    <div class="flex">
+                                                        <div
+                                                            class="flex flex-row gap-4 w-full"
+                                                        >
+                                                            <div
+                                                                class="flex gap-4"
+                                                            >
+                                                                <img
+                                                                    src="assets/images/logo/suylogo.png"
+                                                                    alt="Logo"
+                                                                    class="-ml-5 -mt-5 h-32 w-32"
+                                                                />
+                                                                <div
+                                                                    class="flex flex-col w-64 gap-1"
+                                                                >
+                                                                    <p
+                                                                        class="font-bold text-sm"
+                                                                    >
+                                                                        Ana's
+                                                                        Breeders
+                                                                        Farm
+                                                                        Inc.
+                                                                    </p>
+                                                                    <p
+                                                                        class="text-sm w-56"
+                                                                    >
+                                                                        Sitio
+                                                                        Sto.
+                                                                        Niño,
+                                                                        Pan
+                                                                        Philippine
+                                                                        Highway
+                                                                        Brgy.
+                                                                        Binugao,
+                                                                        Toril
+                                                                        District
+                                                                        Davao
+                                                                        City,
+                                                                        Davao
+                                                                        del Sur,
+                                                                        Philippines.
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Right-aligned Document Details -->
+                                                        <div
+                                                            class="flex flex-row gap-4 w-full justify-end"
+                                                        >
+                                                            <div
+                                                                class="flex flex-col w-64 gap-1 items-end"
+                                                            >
+                                                                <p
+                                                                    class="font-bold text-sm"
+                                                                >
+                                                                    Document
+                                                                    Number
+                                                                    <span
+                                                                        class="font-medium"
+                                                                        >A-60-FR-009</span
+                                                                    >
+                                                                </p>
+                                                                <!-- <p
+                                                                    class="font-bold text-sm"
+                                                                >
+                                                                    Effective
+                                                                    Date
+                                                                    <span
+                                                                        class="font-medium"
+                                                                        >{{
+                                                                            asset
+                                                                                ?.user_accountability_list
+                                                                                .date_created
+                                                                                ? (asset
+                                                                                      ?.user_accountability_list
+                                                                                      .date_created
+                                                                                  | date
+                                                                                      : "MMMM d, y")
+                                                                                : "N/A"
+                                                                        }}</span
+                                                                    >
+                                                                </p> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <mat-divider
+                                                        class="mt-6 mb-4"
+                                                    ></mat-divider>
+                                                    <div
+                                                        class="flex flex-col mt-2 gap-4 uppercase"
+                                                    >
+                                                        <div
+                                                            class="flex flex-col sm:flex-row gap-2 justify-between"
+                                                        >
+                                                            <div
+                                                                class="flex flex-row flex-grow"
+                                                            >
+                                                                <div>
+                                                                    <img
+                                                                        src="https://pngimg.com/uploads/qr_code/small/qr_code_PNG7.png"
+                                                                        alt="Sample QR"
+                                                                        class="h-32 w-32"
+                                                                    />
+                                                                </div>
+                                                                <div
+                                                                    class="flex flex-col"
+                                                                >
+                                                                    <p
+                                                                        class="text-secondary"
+                                                                    >
+                                                                        Inventory
+                                                                        Code
+                                                                    </p>
+                                                                    <p
+                                                                        class="text-primary font-bold text-2xl"
+                                                                    >
+                                                                        {{
+                                                                            asset.uid ||
+                                                                                "N/A"
+                                                                        }}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <mat-divider
+                                                                class="mx-1"
+                                                                vertical
+                                                            ></mat-divider>
+                                                            <div
+                                                                class="flex flex-col gap-4 grid grid-cols-3 gap-5 justify-between"
+                                                            >
+                                                                <div>
+                                                                    <p
+                                                                        class="text-primary font-bold text-lg"
+                                                                    >
+                                                                        Component
+                                                                        Description
+                                                                    </p>
+                                                                    <p
+                                                                        class="text-secondary"
+                                                                    >
+                                                                        {{
+                                                                            asset.description
+                                                                        }}
+                                                                    </p>
+                                                                </div>
+
+                                                                <div>
+                                                                    <p
+                                                                        class="text-primary font-bold text-lg"
+                                                                    >
+                                                                        Parent
+                                                                        Assent
+                                                                        Barcode
+                                                                    </p>
+                                                                    <p
+                                                                        class="text-secondary underline cursor-pointer text-blue-600"
+                                                                        *ngIf="
+                                                                            asset?.computer
+                                                                        "
+                                                                        [routerLink]="
+                                                                            '/assets/computers/view/' +
+                                                                            asset
+                                                                                ?.computer
+                                                                                ?.id
+                                                                        "
+                                                                    >
+                                                                        #
+                                                                        {{
+                                                                            asset
+                                                                                ?.computer
+                                                                                ?.asset_barcode ||
+                                                                                "N/A"
+                                                                        }}
+                                                                        <mat-icon
+                                                                            svgIcon="mat_outline:open_in_new"
+                                                                            class="icon-size-3 underline text-blue-600"
+                                                                        ></mat-icon>
+                                                                    </p>
+                                                                    <p
+                                                                        *ngIf="
+                                                                            !asset?.computer
+                                                                        "
+                                                                        class="text-secondary"
+                                                                    >
+                                                                        N/A
+                                                                    </p>
+                                                                </div>
+
+                                                                <div
+                                                                    class="flex flex-col flex-grow w-full"
+                                                                >
+                                                                    <p
+                                                                        class="text-primary font-bold text-lg"
+                                                                    >
+                                                                        Status
+                                                                    </p>
+                                                                    <p
+                                                                        class="text-secondary"
+                                                                    >
+                                                                        {{
+                                                                            asset.status
+                                                                        }}
+                                                                    </p>
+                                                                </div>
+                                                                <div
+                                                                    class="flex flex-col flex-grow w-full"
+                                                                >
+                                                                    <p
+                                                                        class="text-primary font-bold text-lg"
+                                                                    >
+                                                                        Cost
+                                                                    </p>
+                                                                    <p
+                                                                        class="text-secondary"
+                                                                    >
+                                                                        ₱
+                                                                        {{
+                                                                            asset.cost
+                                                                        }}
+                                                                    </p>
+                                                                </div>
+
+                                                                <div
+                                                                    class="flex flex-col flex-grow w-full"
+                                                                >
+                                                                    <p
+                                                                        class="text-primary font-bold text-lg"
+                                                                    >
+                                                                        Date
+                                                                        Acquired
+                                                                    </p>
+                                                                    <p
+                                                                        class="text-secondary"
+                                                                    >
+                                                                        {{
+                                                                            asset.date_acquired
+                                                                                ? (asset.date_acquired
+                                                                                  | date
+                                                                                      : "MMMM d, y")
+                                                                                : "N/A"
+                                                                        }}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <mat-divider
+                                                        class="mt-6 mb-7"
+                                                    ></mat-divider>
+
+                                                    <p
+                                                        class="text-md font-medium uppercase"
+                                                    >
+                                                        Current Owner Details
+                                                    </p>
+                                                    <p
+                                                        class="text-secondary text-md mb-6 uppercase"
+                                                    >
+                                                        Current owner of the
+                                                        asset details.
+                                                    </p>
+
+                                                    <!-- Responsive Owner Details Section -->
+                                                    <div
+                                                        class="flex flex-col sm:flex-row gap-4 mb-6 uppercase text-md"
+                                                    >
+                                                        <div
+                                                            class="flex flex-col flex-grow gap-4"
+                                                        >
+                                                            <p
+                                                                class="flex flex-col font-medium text-medium"
+                                                            >
+                                                                Owner Name
+                                                                <span
+                                                                    class="text-secondary text-medium"
+                                                                >
+                                                                    {{
+                                                                        asset
+                                                                            ?.owner
+                                                                            ?.name ||
+                                                                            "N/A"
+                                                                    }}
+                                                                </span>
+                                                            </p>
+                                                            <p
+                                                                class="flex flex-col font-medium text-medium"
+                                                            >
+                                                                Business Unit
+                                                                <span
+                                                                    class="text-secondary text-medium"
+                                                                >
+                                                                    {{
+                                                                        asset
+                                                                            ?.owner
+                                                                            ?.company ||
+                                                                            "N/A"
+                                                                    }}
+                                                                </span>
+                                                            </p>
+                                                            <p
+                                                                class="flex flex-col font-medium text-medium"
+                                                            >
+                                                                Department
+                                                                <span
+                                                                    class="text-secondary text-medium"
+                                                                >
+                                                                    {{
+                                                                        asset
+                                                                            ?.owner
+                                                                            ?.department ||
+                                                                            "N/A"
+                                                                    }}
+                                                                </span>
+                                                            </p>
+                                                        </div>
+                                                        <div
+                                                            class="flex flex-col flex-grow gap-4"
+                                                        >
+                                                            <p
+                                                                class="flex flex-col font-medium text-medium"
+                                                            >
+                                                                Employee ID
+                                                                <span
+                                                                    class="text-secondary text-medium"
+                                                                >
+                                                                    {{
+                                                                        asset
+                                                                            ?.owner
+                                                                            ?.employee_id ||
+                                                                            "N/A"
+                                                                    }}
+                                                                </span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </mat-drawer-content>
+        </mat-drawer-container>
+    </form>
+</div>

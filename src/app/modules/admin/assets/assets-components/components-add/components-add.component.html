@@ -1,0 +1,419 @@
+
+<form
+    [formGroup]="eventForm"
+    (ngSubmit)="submitForm()"
+    class="absolute inset-0 flex flex-col min-w-0 overflow-hidden"
+>
+    <mat-drawer-container class="flex-auto h-full">
+        <!-- Drawer -->
+        <mat-drawer
+            class="w-90 dark:bg-gray-900"
+            [autoFocus]="false"
+            [mode]="drawerMode"
+            [opened]="drawerOpened"
+            #matDrawer
+        >
+            <div class="flex flex-col items-start p-8 border-b">
+                <!-- Back to courses -->
+                <a
+                    class="inline-flex items-center leading-6 text-primary hover:underline"
+                    [routerLink]="['..']"
+                >
+                    <span class="inline-flex items-center">
+                        <mat-icon
+                            class="icon-size-5 text-current"
+                            [svgIcon]="'heroicons_solid:arrow-sm-left'"
+                        ></mat-icon>
+                        <span class="ml-1.5 font-medium leading-5"
+                            >Back to lists</span
+                        >
+                    </span>
+                </a>
+                <!-- Course title & description -->
+                <div class="mt-7 text-2xl font-semibold">Add Component</div>
+                <div class="text-secondary">
+                    Fill the component fields to create a component form.
+                </div>
+            </div>
+
+            <!-- Steps -->
+            <div class="py-2 px-8">
+                <ol>
+                    <div class="flex flex-col flex-grow">
+                        <mat-label class="text-xs md:text-sm mb-1"
+                            >Type</mat-label
+                        >
+                        <mat-form-field appearance="fill">
+                            <mat-icon
+                                svgIcon="feather:cpu"
+                                class="icon-size-3 md:icon-size-4 mr-2"
+                            ></mat-icon>
+                            <mat-select
+                                id="type"
+                                formControlName="type"
+                                class="text-xs md:text-sm"
+                                placeholder="Select Type..."
+                            >
+                                <mat-option value="RAM">RAM</mat-option>
+                                <mat-option value="SSD">SSD</mat-option>
+                                <mat-option value="HDD">HDD</mat-option>
+                                <mat-option value="GPU">GPU</mat-option>
+                                <mat-option value="BOARD">BOARD</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <small
+                            class="text-red-500 text-xs"
+                            *ngIf="
+                                eventForm.get('type')?.invalid &&
+                                eventForm.get('type')?.touched
+                            "
+                        >
+                            Type is required.
+                        </small>
+                    </div>
+                    <div class="flex flex-col flex-grow">
+                        <mat-label class="text-xs md:text-sm mb-1"
+                            >Date Acquired</mat-label
+                        >
+                        <mat-form-field appearance="fill">
+                            <mat-icon
+                                svgIcon="feather:calendar"
+                                class="icon-size-3 md:icon-size-4 mr-2"
+                            ></mat-icon>
+                            <input
+                                matInput
+                                [matDatepicker]="picker"
+                                formControlName="date_acquired"
+                                placeholder="Select Date..."
+                                class="text-xs md:text-sm uppercase"
+                            />
+                            <mat-datepicker-toggle
+                                matSuffix
+                                [for]="picker"
+                            ></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                        <small
+                            class="text-red-500 text-xs"
+                            *ngIf="
+                                eventForm.get('date_acquired')?.invalid &&
+                                eventForm.get('date_acquired')?.touched
+                            "
+                        >
+                            Date is required.
+                        </small>
+                    </div>
+
+                    <div class="flex flex-col flex-grow w-full">
+                        <mat-label class="text-xs md:text-sm mb-1"
+                            >Description</mat-label
+                        >
+                        <mat-form-field appearance="fill">
+                            <mat-icon
+                                svgIcon="feather:info"
+                                class="icon-size-3 md:icon-size-4 mr-2"
+                            ></mat-icon>
+                            <input
+                                matInput
+                                formControlName="description"
+                                id="description"
+                                placeholder="Enter description..."
+                                class="text-xs md:text-sm uppercase"
+                            />
+                        </mat-form-field>
+                        <small
+                            class="text-red-500 text-xs"
+                            *ngIf="
+                                eventForm.get('description')?.invalid &&
+                                eventForm.get('description')?.touched
+                            "
+                        >
+                            Description is required.
+                        </small>
+                    </div>
+                    <div class="flex flex-col flex-grow w-full">
+                        <mat-label class="text-xs md:text-sm mb-1"
+                            >Cost</mat-label
+                        >
+                        <mat-form-field appearance="fill">
+                            <mat-icon
+                                svgIcon="feather:info"
+                                class="icon-size-3 md:icon-size-4 mr-2"
+                            ></mat-icon>
+                            <input
+                                type="number"
+                                matInput
+                                formControlName="cost"
+                                id="cost"
+                                placeholder="Enter cost..."
+                                class="text-xs md:text-sm uppercase"
+                            />
+                        </mat-form-field>
+                        <small
+                            class="text-red-500 text-xs"
+                            *ngIf="
+                                eventForm.get('cost')?.invalid &&
+                                eventForm.get('cost')?.touched
+                            "
+                        >
+                            cost is required.
+                        </small>
+
+                        <button
+                            class="px-6"
+                            mat-flat-button
+                            type="submit"
+                            [color]="'primary'"
+                        >
+                            <mat-icon
+                                class="icon-size-4"
+                                svgIcon="mat_solid:subdirectory_arrow_right"
+                            ></mat-icon>
+                            <span class="ml-1 text-sm"> Create Peripheral</span>
+                        </button>
+                    </div>
+                </ol>
+            </div>
+        </mat-drawer>
+
+        <!-- Drawer content -->
+        <mat-drawer-content class="flex flex-col overflow-hidden">
+            <!-- Header -->
+            <div
+                class="lg:hidden flex flex-0 items-center py-2 pl-4 pr-6 sm:py-4 md:pl-6 md:pr-8 border-b lg:border-b-0 bg-card dark:bg-transparent"
+            >
+                <!-- Title & Actions -->
+                <button mat-icon-button [routerLink]="['..']">
+                    <mat-icon
+                        [svgIcon]="'heroicons_outline:arrow-sm-left'"
+                    ></mat-icon>
+                </button>
+                <h2
+                    class="ml-2.5 text-md sm:text-xl font-medium tracking-tight truncate"
+                >
+                    Accountability Details
+                </h2>
+            </div>
+            <mat-progress-bar
+                class="hidden lg:block flex-0 h-0.5 w-full"
+            ></mat-progress-bar>
+
+            <!-- Main -->
+            <div class="flex-auto overflow-y-auto" cdkScrollable>
+                <!-- Steps -->
+                <mat-tab-group
+                    class="fuse-mat-no-header"
+                    [animationDuration]="'200'"
+                    #courseSteps
+                >
+                    <mat-tab>
+                        <ng-template matTabContent>
+                            <div
+                                class="mx-auto inset-0 min-w-0 text-center overflow-auto print:overflow-visible"
+                                cdkScrollable
+                            >
+                                <!-- A4 Wrapper -->
+                                <div class="a4-container">
+                                    <!-- Page Content -->
+                                    <div
+                                        class="inline-block p-6 sm:p-10 text-left print:p-0"
+                                    >
+                                        <div
+                                            class="w-240 min-w-240 p-16 rounded-2xl shadow bg-card print:w-auto print:p-0 print:rounded-none print:shadow-none print:bg-transparent"
+                                        >
+                                            <div id="pdfFormArea" #pdfFormArea>
+                                                <div class="flex">
+                                                    <div
+                                                        class="flex flex-row gap-4 w-full"
+                                                    >
+                                                        <div class="flex gap-4">
+                                                            <img
+                                                                src="assets/images/logo/suylogo.png"
+                                                                alt="Logo"
+                                                                class="-ml-5 -mt-5 h-32 w-32"
+                                                            />
+                                                            <div
+                                                                class="flex flex-col w-64 gap-1"
+                                                            >
+                                                                <p
+                                                                    class="font-bold text-sm"
+                                                                >
+                                                                    Ana's
+                                                                    Breeders
+                                                                    Farm Inc.
+                                                                </p>
+                                                                <p
+                                                                    class="text-sm w-56"
+                                                                >
+                                                                    Sitio Sto.
+                                                                    Niño, Pan
+                                                                    Philippine
+                                                                    Highway
+                                                                    Brgy.
+                                                                    Binugao,
+                                                                    Toril
+                                                                    District
+                                                                    Davao City,
+                                                                    Davao del
+                                                                    Sur,
+                                                                    Philippines.
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Right-aligned Document Details -->
+                                                    <div
+                                                        class="flex flex-row gap-4 w-full justify-end"
+                                                    >
+                                                        <div
+                                                            class="flex flex-col w-64 gap-1 items-end"
+                                                        >
+                                                            <p
+                                                                class="font-bold text-sm"
+                                                            >
+                                                                Document Number
+                                                                <span
+                                                                    class="font-medium"
+                                                                    >A-60-FR-009</span
+                                                                >
+                                                            </p>
+                                                            <p
+                                                                class="font-bold text-sm"
+                                                            >
+                                                                Effective Date
+                                                                <span
+                                                                    class="font-medium"
+                                                                    >{{
+                                                                        asset
+                                                                            ?.user_accountability_list
+                                                                            .date_created
+                                                                            ? (asset
+                                                                                  ?.user_accountability_list
+                                                                                  .date_created
+                                                                              | date
+                                                                                  : "MMMM d, y")
+                                                                            : "N/A"
+                                                                    }}</span
+                                                                >
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p
+                                                    class="flex justify-center text-2xl font-semibold w-full"
+                                                >
+                                                    COMPONENT FORM
+                                                </p>
+                                                <div
+                                                    class="mt-5 w-full flex flex-row gap-12"
+                                                >
+                                                    <div>
+                                                        <img
+                                                            id="preview-image"
+                                                            src="https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small_2x/no-image-available-icon-vector.jpg"
+                                                            alt="Select Image"
+                                                            class="h-42 w-36 object-contain border border-gray-300 rounded-md"
+                                                        />
+                                                    </div>
+
+                                                    <div
+                                                        class="grid grid-cols-2 w-full uppercase"
+                                                    >
+                                                        <div>
+                                                            <p
+                                                                class="text-sm md:text-md font-bold text-primary"
+                                                            >
+                                                                Type
+                                                            </p>
+                                                            <div
+                                                                class="flex justify-start items-start gap-2"
+                                                            >
+                                                                <span>
+                                                                    {{
+                                                                        this
+                                                                            .eventForm
+                                                                            .value
+                                                                            .type ||
+                                                                            "N/A"
+                                                                    }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <p
+                                                                class="text-sm md:text-md font-bold text-primary"
+                                                            >
+                                                                COST
+                                                            </p>
+                                                            <div
+                                                                class="flex justify-start items-start gap-2"
+                                                            >
+                                                                <span>
+                                                                    {{
+                                                                        this
+                                                                            .eventForm
+                                                                            .value
+                                                                            .cost ||
+                                                                            "N/A"
+                                                                    }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <p
+                                                                class="text-sm md:text-md font-bold text-primary"
+                                                            >
+                                                                Long Item
+                                                                Description
+                                                            </p>
+                                                            <div
+                                                                class="flex justify-start items-start gap-2"
+                                                            >
+                                                                <span>
+                                                                    {{
+                                                                        this
+                                                                            .eventForm
+                                                                            .value
+                                                                            .description ||
+                                                                            "N/A"
+                                                                    }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div>
+                                                            <p
+                                                                class="text-md font-semibold"
+                                                            >
+                                                                Date Acquired
+                                                            </p>
+                                                            <span>
+                                                                {{
+                                                                     this.
+                                                                    eventForm.value
+                                                                        .date_acquired
+                                                                        ? (eventForm
+                                                                              .value
+                                                                              .date_acquired
+                                                                          | date
+                                                                              : "MMMM d, y")
+                                                                        : "N/A"
+                                                                }}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</form>

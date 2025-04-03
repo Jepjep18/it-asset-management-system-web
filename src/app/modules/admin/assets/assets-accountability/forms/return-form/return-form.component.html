@@ -1,0 +1,714 @@
+<div  *ngIf="loading" class="loader">
+    <img
+        class="-mb-5"
+        style="height: 65px; width: 65px"
+        src="assets/images/logo/favicon-192x192.png"
+        alt="It Assets Logo"
+    />
+    <div class="spinner w-16">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<div
+    class="inset-0 min-w-0 text-center overflow-auto print:overflow-visible m-0 lg:m-12 lg:mx-auto"
+    cdkScrollable
+>
+    <!-- A4 Wrapper -->
+    <div class="a4-container">
+        <!-- Page Content -->
+        <div class="inline-block p-6 sm:p-10 text-left print:p-0">
+            <div
+                class="w-240 min-w-240 p-16 rounded-2xl shadow bg-card print:w-auto print:p-0 print:rounded-none print:shadow-none print:bg-transparent"
+            >
+                <!-- Header Section -->
+                <div
+                    class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b pb-6 mb-6"
+                >
+                    <div class="text-center sm:text-left w-full">
+                        <div class="flex w-full justify-between">
+                            <!-- Logo and Company Info -->
+                            <div class="flex gap-4">
+                                <img
+                                    src="assets/images/logo/suylogo.png"
+                                    alt="Logo"
+                                    class="-ml-5 -mt-5 h-32 w-32"
+                                />
+                                <div class="flex flex-col w-64 gap-1">
+                                    <p class="font-bold text-sm">
+                                        Ana's Breeders Farm Inc.
+                                    </p>
+                                    <p class="text-sm w-56">
+                                        Sitio Sto. Niño, Pan Philippine Highway
+                                        Brgy. Binugao, Toril District Davao
+                                        City, Davao del Sur, Philippines.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Right-aligned Document Details -->
+                            <div class="flex flex-col w-64 gap-1 items-end">
+                                <p class="font-bold text-sm">
+                                    Accountability Code
+                                    <span class="font-medium">{{
+                                        accountabilityItem
+                                            ?.user_accountability_list
+                                            ?.accountability_code
+                                    }}</span>
+                                </p>
+                                <p class="font-bold text-sm">
+                                    Tracking Code
+                                    <span class="font-medium">{{
+                                        accountabilityItem
+                                            ?.user_accountability_list
+                                            ?.tracking_code
+                                    }}</span>
+                                </p>
+                                <p class="font-bold text-sm">
+                                    Date Created
+                                    <span class="font-medium">
+                                        {{
+                                            accountabilityItem
+                                                ?.user_accountability_list
+                                                ?.date_created
+                                                ? (accountabilityItem
+                                                      ?.user_accountability_list
+                                                      ?.date_created
+                                                  | date : "MMMM d, y")
+                                                : "N/A"
+                                        }}
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Form Title -->
+                        <p
+                            class="flex justify-center text-2xl font-semibold w-full"
+                        >
+                            RETURN FORM
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content Section -->
+                <div class="space-y-6 flex-grow w-full">
+                    <div *ngIf="accountabilityItem" class="space-y-6">
+                        <div class="flex flex-row w-full mx-auto mt-8 gap-12">
+                            <!-- Owner Details -->
+                            <div class="flex flex-col gap-0.5 w-58">
+                                <p class="text-lg tracking-tight font-bold">
+                                    OWNER DETAILS
+                                </p>
+                                <div class="flex flex-row gap-2 text-sm">
+                                    <p
+                                        class="text-regular tracking-tight font-bold"
+                                    >
+                                        Employee Name
+                                    </p>
+                                    <span class="font-medium">{{
+                                        accountabilityItem
+                                            ?.user_accountability_list?.owner
+                                            .name || "N/A"
+                                    }}</span>
+                                </div>
+                                <div class="flex flex-row gap-10 text-sm">
+                                    <p
+                                        class="text-regular tracking-tight font-bold"
+                                    >
+                                        ID Number
+                                    </p>
+                                    <span class="font-medium">{{
+                                        accountabilityItem
+                                            ?.user_accountability_list?.owner
+                                            .employee_id || "N/A"
+                                    }}</span>
+                                </div>
+                                <div class="flex flex-row gap-8 text-sm">
+                                    <p
+                                        class="text-regular tracking-tight font-bold"
+                                    >
+                                        Designation
+                                    </p>
+                                    <span class="font-medium">{{
+                                        accountabilityItem
+                                            ?.user_accountability_list?.owner
+                                            .designation || "N/A"
+                                    }}</span>
+                                </div>
+                            </div>
+
+                            <!-- Additional Owner Info -->
+                            <div class="flex flex-col gap-0.5 w-58 mt-7">
+                                <div class="flex flex-row gap-15 text-sm">
+                                    <p
+                                        class="text-regular tracking-tight font-bold"
+                                    >
+                                        Business Unit
+                                    </p>
+                                    <span class="font-medium">{{
+                                        accountabilityItem
+                                            ?.user_accountability_list?.owner
+                                            .company || "N/A"
+                                    }}</span>
+                                </div>
+                                <div class="flex flex-row gap-11 text-sm">
+                                    <p
+                                        class="text-regular tracking-tight font-bold"
+                                    >
+                                        Department
+                                    </p>
+                                    <span class="font-medium">{{
+                                        accountabilityItem
+                                            ?.user_accountability_list?.owner
+                                            .department || "N/A"
+                                    }}</span>
+                                </div>
+                                <div class="flex flex-row gap-12 text-sm">
+                                    <p
+                                        class="text-regular tracking-tight font-bold"
+                                    >
+                                        Date Hired
+                                    </p>
+                                    <span class="ml-1.5 font-medium">
+                                        {{
+                                            accountabilityItem
+                                                ?.user_accountability_list
+                                                ?.owner.date_hired
+                                                ? (accountabilityItem
+                                                      .user_accountability_list
+                                                      ?.owner.date_hired?.value
+                                                  | date : "MMMM d, y")
+                                                : "N/A"
+                                        }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Assets Table -->
+                        <div class="page-break"></div>
+                        <div class="flex flex-col my-4">
+                            <p class="text-sm font-semibold mt-5">
+                                Computer under accountability
+                            </p>
+                            <span class="text-secondary text-sm"
+                                >(Desktop, Laptops, etc..)</span
+                            >
+                        </div>
+
+                        <div
+                            class="overflow-x-auto"
+                            *ngIf="accountabilityItem?.computers?.length"
+
+                        >
+                        <mat-table
+                        [dataSource]="accountabilityItem.computers"
+                        matSort
+                        class="mat-elevation-z8 custom-mat-table"
+                    >
+                                <!-- Returned Column -->
+                                <ng-container matColumnDef="returned">
+                                    <mat-header-cell
+                                        class="text-xs"
+                                        *matHeaderCellDef
+                                        >Returned</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        class="text-xs flex"
+                                        *matCellDef="let computer"
+                                    >
+                                        <!-- Computer Checkbox -->
+                                        <mat-checkbox
+    [(ngModel)]="computer.checked"
+    (change)="updateButtonState()"
+    class="w-6 h-6"
+></mat-checkbox>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Type Column -->
+                                <ng-container matColumnDef="type">
+                                    <mat-header-cell
+                                        class="text-xs"
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >Type</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        class="text-xs"
+                                        *matCellDef="let computer"
+                                        >{{ computer.type }}</mat-cell
+                                    >
+                                </ng-container>
+
+                                <!-- Asset Barcode Column -->
+                                <ng-container matColumnDef="asset_barcode">
+                                    <mat-header-cell
+                                        class="text-xs"
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >Asset Barcode</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        class="text-xs"
+                                        *matCellDef="let computer"
+                                        >{{ computer.asset_barcode }}</mat-cell
+                                    >
+                                </ng-container>
+
+                                <!-- Brand Column -->
+                                <ng-container matColumnDef="brand">
+                                    <mat-header-cell
+                                        class="text-xs"
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >Brand</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        class="text-xs"
+                                        *matCellDef="let computer"
+                                        >{{ computer.brand }}</mat-cell
+                                    >
+                                </ng-container>
+
+                                <!-- Model Column -->
+                                <ng-container matColumnDef="model">
+                                    <mat-header-cell
+                                        class="text-xs"
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >Model</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        class="text-xs"
+                                        *matCellDef="let computer"
+                                        >{{ computer.model }}</mat-cell
+                                    >
+                                </ng-container>
+
+                                <!-- Condition Column -->
+                                <ng-container matColumnDef="condition">
+                                    <mat-header-cell
+                                        class="text-xs"
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >Condition</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        class="text-xs"
+                                        *matCellDef="let computer"
+                                    >
+                                        <mat-select
+                                            [(ngModel)]="computer.condition"
+                                            class="w-full"
+                                        >
+                                            <mat-option value="Good"
+                                                >Good</mat-option
+                                            >
+                                            <mat-option value="Damaged"
+                                                >Damaged</mat-option
+                                            >
+                                            <mat-option value="Missing"
+                                                >Missing</mat-option
+                                            >
+                                        </mat-select>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Remarks Column -->
+                                <ng-container matColumnDef="remarks">
+                                    <mat-header-cell
+                                        class="text-xs"
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >Remarks</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        class="text-xs"
+                                        *matCellDef="let computer"
+                                    >
+                                        <input
+                                            matInput
+                                            [(ngModel)]="computer.remarks"
+                                            placeholder="Remarks"
+                                            class="w-full border p-1 rounded"
+                                        />
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row
+                                    *matHeaderRowDef="[
+                                        'returned',
+                                        'type',
+                                        'asset_barcode',
+                                        'brand',
+                                        'model',
+                                        'condition',
+                                        'remarks'
+                                    ]"
+                                ></mat-header-row>
+                                <mat-row
+                                    *matRowDef="
+                                        let row;
+                                        columns: [
+                                            'returned',
+                                            'type',
+                                            'asset_barcode',
+                                            'brand',
+                                            'model',
+                                            'condition',
+                                            'remarks'
+                                        ]
+                                    "
+                                    class="hover:bg-gray-100 h-12 cursor-pointer"
+                                ></mat-row>
+                            </mat-table>
+                        </div>
+                        <div class="flex flex-col my-4">
+                            <p class="text-sm font-semibold mt-5">
+                                Computer Components under accountability
+                            </p>
+                            <span class="text-secondary text-sm"
+                                >(Ram, ssd, hdd ...)</span
+                            >
+                        </div>
+                        <div
+                            class="overflow-x-auto"
+                            *ngIf="flattenedComponents.length"
+                        >
+                            <!-- Components Table -->
+                            <mat-table
+                                [dataSource]="flattenedComponents"
+                                matSort
+                                class="mat-elevation-z8 custom-mat-table"
+                            >
+                                <!-- Component Type Column -->
+                                <ng-container matColumnDef="componentType">
+                                    <mat-header-cell
+                                        class="text-xs"
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                    >
+                                        Component Type
+                                    </mat-header-cell>
+                                    <mat-cell
+                                        class="text-xs text-gray-700"
+                                        *matCellDef="let component"
+                                    >
+                                        {{ getComponentType(component.type) }}
+                                    </mat-cell>
+                                </ng-container>
+                                
+
+                                <!-- Returned Column -->
+                                <ng-container matColumnDef="returned">
+                                    <mat-header-cell
+                                        class="text-xs"
+                                        *matHeaderCellDef
+                                        >Returned</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        class="text-xs flex"
+                                        *matCellDef="let component"
+                                    >
+                                        <!-- Component Checkbox -->
+                                        <mat-checkbox
+    [(ngModel)]="component.checked"
+    (change)="updateButtonState()"
+></mat-checkbox>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Component ID Column -->
+                                <ng-container matColumnDef="uid">
+                                    <mat-header-cell
+                                        class="text-xs"
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >Component ID</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        class="text-xs"
+                                        *matCellDef="let component"
+                                        >{{ component.uid }}</mat-cell
+                                    >
+                                </ng-container>
+
+                                <!-- Description Column -->
+                                <ng-container matColumnDef="description">
+                                    <mat-header-cell
+                                        class="text-xs"
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >Description</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        class="text-xs"
+                                        *matCellDef="let component"
+                                        >{{ component.description }}</mat-cell
+                                    >
+                                </ng-container>
+
+                                <!-- Condition Column -->
+                                <ng-container matColumnDef="condition">
+                                    <mat-header-cell
+                                        class="text-xs"
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >Condition</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        class="text-xs"
+                                        *matCellDef="let component"
+                                    >
+                                        <mat-select
+                                            [(ngModel)]="component.condition"
+                                            class="w-full"
+                                        >
+                                            <mat-option value="Good"
+                                                >Good</mat-option
+                                            >
+                                            <mat-option value="Damaged"
+                                                >Damaged</mat-option
+                                            >
+                                            <mat-option value="Missing"
+                                                >Missing</mat-option
+                                            >
+                                        </mat-select>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Remarks Column -->
+                                <ng-container matColumnDef="remarks">
+                                    <mat-header-cell
+                                        class="text-xs"
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >Remarks</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        class="text-xs"
+                                        *matCellDef="let component"
+                                    >
+                                        <input
+                                            matInput
+                                            [(ngModel)]="component.remarks"
+                                            placeholder="Remarks"
+                                            class="w-full border p-1 rounded"
+                                        />
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Header Row -->
+                                <mat-header-row
+                                    *matHeaderRowDef="[
+                                        'returned',
+                                        'componentType',
+
+                                        'uid',
+                                        'description',
+                                        'condition',
+                                        'remarks'
+                                    ]"
+                                ></mat-header-row>
+
+                                <!-- Data Row -->
+                                <mat-row
+                                    *matRowDef="
+                                        let row;
+                                        columns: [
+                                            'returned',
+                                            'componentType',
+
+                                            'uid',
+                                            'description',
+                                            'condition',
+                                            'remarks'
+                                        ]
+                                    "
+                                    class="hover:bg-gray-100 h-12 cursor-pointer"
+                                ></mat-row>
+                            </mat-table>
+                        </div>
+
+                        <div class="flex flex-col my-4">
+                            <p class="text-sm font-semibold mt-5">
+                                Assets under accountability
+                            </p>
+                            <span class="text-secondary text-sm">
+                                (Mouse, Keyboards etc..)</span
+                            >
+                        </div>
+
+                        <div
+                            class="overflow-x-auto"
+                            *ngIf="
+                                accountabilityItem?.computers?.length
+                            "
+                        >
+                            <!-- Assets Table -->
+                            <mat-table
+                                [dataSource]="assetDataSource"
+                                matSort
+                                class="mat-elevation-z8 custom-mat-table"
+                            >
+                                <!-- Returned Column -->
+                                <ng-container matColumnDef="returned">
+                                    <mat-header-cell *matHeaderCellDef
+                                        >Returned</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let asset">
+                                        <mat-checkbox
+    [(ngModel)]="asset.checked"
+    (change)="updateButtonState()"
+    class="w-6 h-6 rounded-md accent-blue-600"
+></mat-checkbox>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Type Column -->
+                                <ng-container matColumnDef="type">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >Type</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let asset">{{
+                                        asset.type || "N/A"
+                                    }}</mat-cell>
+                                </ng-container>
+
+                                <!-- Asset Barcode Column -->
+                                <ng-container matColumnDef="asset_barcode">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >Asset Barcode</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let asset">{{
+                                        asset.asset_barcode || "N/A"
+                                    }}</mat-cell>
+                                </ng-container>
+
+                                <!-- Brand Column -->
+                                <ng-container matColumnDef="brand">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >Brand</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let asset">{{
+                                        asset.brand || "N/A"
+                                    }}</mat-cell>
+                                </ng-container>
+
+                                <!-- Model Column -->
+                                <ng-container matColumnDef="model">
+                                    <mat-header-cell
+                                        *matHeaderCellDef
+                                        mat-sort-header
+                                        >Model</mat-header-cell
+                                    >
+                                    <mat-cell *matCellDef="let asset">{{
+                                        asset.model || "N/A"
+                                    }}</mat-cell>
+                                </ng-container>
+
+                                <!-- Condition Column -->
+                                <ng-container matColumnDef="condition">
+                                    <mat-header-cell *matHeaderCellDef
+                                        >Condition</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        class="text-xs"
+                                        *matCellDef="let asset"
+                                    >
+                                        <mat-select
+                                            [(ngModel)]="asset.condition"
+                                            class="w-full"
+                                        >
+                                            <mat-option value="Good"
+                                                >Good</mat-option
+                                            >
+                                            <mat-option value="Damaged"
+                                                >Damaged</mat-option
+                                            >
+                                            <mat-option value="Missing"
+                                                >Missing</mat-option
+                                            >
+                                        </mat-select>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Remarks Column -->
+                                <ng-container matColumnDef="remarks">
+                                    <mat-header-cell *matHeaderCellDef
+                                        >Remarks</mat-header-cell
+                                    >
+                                    <mat-cell
+                                        class="text-xs"
+                                        *matCellDef="let asset"
+                                    >
+                                        <input
+                                            matInput
+                                            [(ngModel)]="asset.remarks"
+                                            placeholder="Remarks"
+                                            class="w-full border p-1 rounded"
+                                        />
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Header Row -->
+                                <mat-header-row
+                                    *matHeaderRowDef="[
+                                        'returned',
+                                        'type',
+                                        'asset_barcode',
+                                        'brand',
+                                        'model',
+                                        'condition',
+                                        'remarks'
+                                    ]"
+                                ></mat-header-row>
+
+                                <!-- Data Row -->
+                                <mat-row
+                                    *matRowDef="
+                                        let row;
+                                        columns: [
+                                            'returned',
+                                            'type',
+                                            'asset_barcode',
+                                            'brand',
+                                            'model',
+                                            'condition',
+                                            'remarks'
+                                        ]
+                                    "
+                                    class="hover:bg-gray-100 cursor-pointer"
+                                >
+                                </mat-row>
+                            </mat-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fixed bottom-4 right-4 flex flex-col space-y-4">
+          <button
+          class="bg-white shadow-lg flex items-center justify-center hover:bg-blue-50 p-2 rounded-full transition-colors"
+          (click)="submitReturnChecklist()"
+          [disabled]="!allCheckboxesChecked()"
+          matTooltip="Submit form"
+          matTooltipPosition="above"
+          aria-label="Submit form"
+          style="width: 56px; height: 56px"
+        >
+          <mat-icon svgIcon="check" class="text-gray-500"></mat-icon>
+        </button>
+        </div>
+    </div>
+</div>
