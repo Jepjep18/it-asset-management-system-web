@@ -401,7 +401,7 @@ private getFormValidationErrors(): any {
 
 
 selectedComponent: string = '';
-availableComponents: string[] = ['RAM', 'SSD', 'HDD', 'GPU', 'BOARD'];
+availableComponents: string[] = ['RAM', 'SSD', 'HDD', 'GPU', 'BOARD', 'PROCESSOR' , 'PSU', 'CASE'];
 get componentsArray(): FormArray {
     return this.eventForm.get('components') as FormArray;
 }

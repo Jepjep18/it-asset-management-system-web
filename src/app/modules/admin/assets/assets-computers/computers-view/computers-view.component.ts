@@ -95,6 +95,10 @@ export class ComputersViewComponent implements OnInit {
         addToDataSource('HDD', 'feather:hard-drive', this.asset?.hdd?.values);
         addToDataSource('GPU', 'feather:monitor', this.asset?.gpu?.values);
         addToDataSource('BOARD', 'feather:info', this.asset?.board?.values);
+        addToDataSource('PROCESSOR', 'feather:info', this.asset?.processor?.values);
+        addToDataSource('PSU', 'feather:info', this.asset?.psu?.values);
+        addToDataSource('CASE', 'feather:info', this.asset?.casee?.values);
+
 
         // Create assigned assets data source
         this.dataSourceAssignedAssets = this.asset?.assigned_assets?.values?.map(asset => ({

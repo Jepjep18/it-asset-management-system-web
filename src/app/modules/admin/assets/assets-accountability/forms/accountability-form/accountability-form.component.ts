@@ -55,6 +55,10 @@ interface ComputerData {
         HDD?: Array<ComponentDetail>;
         SSD?: Array<ComponentDetail>;
         GPU?: Array<ComponentDetail>;
+        PROCESSOR?: Array<ComponentDetail>;
+        PSU?: Array<ComponentDetail>;
+        CASEE?: Array<ComponentDetail>;
+
     };
 }
 
@@ -117,6 +121,7 @@ interface AccountabilityApproval {
     styleUrls: ['./accountability-form.component.scss'],
 })
 export class AccountabilityFormComponent implements OnInit {
+    
     displayedColumns: string[] = [
         'type',
         'dateAcquired',
@@ -131,7 +136,7 @@ export class AccountabilityFormComponent implements OnInit {
     dataSourceComputers = new MatTableDataSource<ComputerData>();
     dataSourceAssignedAssets = new MatTableDataSource<AssignedAssetData>();
     dataSourceAssignedComponents = new MatTableDataSource<ComponentDetail>();
-    datenow: string;
+    datenow: Date;
 
     loading: boolean = false; // Add this line
     private _unsubscribeAll: Subject<any> = new Subject<any>();
@@ -161,6 +166,9 @@ export class AccountabilityFormComponent implements OnInit {
     asset!: Accountability;
 
     ngOnInit() {
+
+        this.datenow = new Date(); // Initialize datenow with the current date
+
         // Get user data first
         this._userService.user$
             .pipe(takeUntil(this._unsubscribeAll))

@@ -91,8 +91,8 @@ export class ReturnFormComponent implements OnInit {
     
                 // ✅ Check the structure of components data
                 const componentsArray = computersArray.flatMap(computer => {
-                    const { BOARD, HDD, RAM, SSD } = computer.components;
-                    return [...(BOARD || []), ...(HDD || []), ...(RAM || []), ...(SSD || [])];
+                    const { BOARD, HDD, RAM, SSD, PROCESSOR , PSU, CASE } = computer.components;
+                    return [...(BOARD || []), ...(HDD || []), ...(RAM || []), ...(SSD || []), ...(PROCESSOR || []), ...(PSU || []), ...(CASE || [])];
                 });
                 // console.log('Processed Components Array:', componentsArray);
     
@@ -279,8 +279,8 @@ export class ReturnFormComponent implements OnInit {
                 }
 
                 // Process components
-                const { BOARD, HDD, RAM, SSD, GPU } = computer.components;
-                const componentsArray = [...(BOARD || []), ...(HDD || []), ...(RAM || []), ...(SSD || []), ...(GPU || [])];
+                const { BOARD, HDD, RAM, SSD, GPU , PROCESSOR , PSU , CASE } = computer.components;
+                const componentsArray = [...(BOARD || []), ...(HDD || []), ...(RAM || []), ...(SSD || []), ...(GPU || []) , ...(PROCESSOR || []), ...(PSU || []), ...(CASE || [])];
                 for (const component of componentsArray) {
                     const componentItem = {
                         accountability_id: this.accountabilityItem.user_accountability_list?.id ?? null,
@@ -356,7 +356,7 @@ export class ReturnFormComponent implements OnInit {
 }
 
     getComponentType(type: string): string {
-      const validTypes = ['GPU', 'RAM', 'SSD', 'HDD', 'BOARD'];
+      const validTypes = ['GPU', 'RAM', 'SSD', 'HDD', 'BOARD', 'PROCESSOR', 'PSU', 'CASE'];
       return validTypes.includes(type) ? type : 'Unknown';
   }
 
